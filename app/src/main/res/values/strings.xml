@@ -2,6 +2,7 @@
     <string name="app_name">Shop Here</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="prompt_username">Username</string>
+    <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">SIGN IN</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -22,4 +23,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="create_account_text">Create account</string>
+    <string name="show_password_text">Show password</string>
+    <string name="or_text">--------- Or ---------</string>
+    <string name="sign_in_now_text">Sign-In Now</string>
+    <string name="create_your_shophere_account_text">Create your ShopHere account</string>
 </resources>
