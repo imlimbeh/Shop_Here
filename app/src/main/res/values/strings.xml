@@ -25,7 +25,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="create_account_text">Create account</string>
     <string name="show_password_text">Show password</string>
-    <string name="or_text">--------- Or ---------</string>
+    <string name="or_text">--------------------     Or     --------------------</string>
     <string name="sign_in_now_text">Sign-In Now</string>
     <string name="create_your_shophere_account_text">Create your ShopHere account</string>
 </resources>
