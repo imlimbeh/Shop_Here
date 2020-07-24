@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shophere.R;
+import com.example.shophere.SignUp;
 import com.example.shophere.ui.login.LoginViewModel;
 import com.example.shophere.ui.login.LoginViewModelFactory;
 
@@ -127,5 +129,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    public void btn_sign_up(View view){
+        Intent intent = new Intent(LoginActivity.this, SignUp.class);
+        startActivity(intent);
     }
 }
