@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6000000"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -27,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/shop_name_text"
-        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_id" />
@@ -36,7 +38,10 @@
         android:id="@+id/sign_in"
         android:layout_width="153dp"
         android:layout_height="wrap_content"
+        android:background="@android:drawable/dark_header"
         android:text="@string/sign_in_text"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/sign_up"
         app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +53,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="@string/sign_up_text"
+        android:background="@android:drawable/dark_header"
         android:onClick="btn_sign_up"
+        android:text="@string/sign_up_text"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/sign_in"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -60,14 +68,16 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints=""
+        android:background="@android:color/white"
         android:hint="@string/prompt_username"
         android:inputType="textShortMessage"
         android:selectAllOnFocus="true"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in" />
 
     <EditText
         android:id="@+id/password"
@@ -76,16 +86,18 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:autofillHints=""
+        android:background="@android:color/white"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <CheckBox
         android:id="@+id/stay_signin"
@@ -96,6 +108,8 @@
         android:layout_marginTop="8dp"
         android:checked="true"
         android:text="@string/stay_signin_text"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -107,8 +121,11 @@
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="150dp"
+        android:background="#4CAF93"
         android:enabled="false"
         android:text="@string/action_sign_in"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
