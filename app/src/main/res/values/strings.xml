@@ -28,4 +28,5 @@
     <string name="or_text">--------------------     Or     --------------------</string>
     <string name="sign_in_now_text">Sign-In Now</string>
     <string name="create_your_shophere_account_text">Create your ShopHere account</string>
+    <string name="logout_text">LOGOUT</string>
 </resources>

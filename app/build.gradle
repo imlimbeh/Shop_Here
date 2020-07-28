@@ -7,12 +7,14 @@ android {
 
     defaultConfig {
         applicationId "com.example.shophere"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -46,6 +48,8 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.2'
 
     // add the Firebase
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
     implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-firestore:21.5.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }

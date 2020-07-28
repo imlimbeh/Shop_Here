@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     EditText em, ps;
     Button bL, bSU;
     FirebaseAuth mFirebaseAuth;
+    ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         ps = (EditText)findViewById(R.id.password);
         bL = (Button)findViewById(R.id.login);
         bSU = (Button)findViewById(R.id.sign_up);
+        progressBar = findViewById(R.id.progressBar);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -67,14 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 } else if (email.isEmpty() && password.isEmpty()){
                     Toast.makeText(MainActivity.this,"Fields Are Empty!",Toast.LENGTH_SHORT);
                 }else if (!(email.isEmpty() && password.isEmpty())){
+                    progressBar.setVisibility(View.VISIBLE);
                     mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (!task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Login Failed! Please Login Again!!!", Toast.LENGTH_SHORT);
-                            }else{
+                            if (task.isSuccessful()) {
                                 Intent loginSuccessful = new Intent(MainActivity.this, MainStore.class);
                                 startActivity(loginSuccessful);
+                            }else{
+                                Toast.makeText(MainActivity.this, "Login Failed!!! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     });

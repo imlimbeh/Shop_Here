@@ -14,9 +14,7 @@
             android:name=".MainStore"
             android:label="@string/title_activity_main_store"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.example.shophere.MainActivity"
-            android:label="@string/app_name">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

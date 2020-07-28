@@ -1,24 +1,43 @@
 package com.example.shophere;
 
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String TAG = "TAG";
     Button bCA, bSI;
     EditText un, em, ps;
     FirebaseAuth mFirebaseAuth;
+    FirebaseFirestore mStore;
+    ProgressBar progressBar;
+    String userID;
+    CheckBox showPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +45,25 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.sign_up);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mStore = FirebaseFirestore.getInstance();
         un = (EditText)findViewById(R.id.username);
         em = (EditText)findViewById(R.id.email);
         ps = (EditText)findViewById(R.id.password);
         bCA = (Button)findViewById(R.id.create_account);
         bSI = (Button)findViewById(R.id.sign_in_now);
+        progressBar = findViewById(R.id.progressBar);
+        showPassword = (CheckBox)findViewById(R.id.show_password);
+
+        showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    ps.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                    ps.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
 
         bCA.setOnClickListener(this);
         bSI.setOnClickListener(this);
@@ -38,8 +71,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.create_account:
-                String username = un.getText().toString();
-                String email = em.getText().toString();
+                final String username = un.getText().toString();
+                final String email = em.getText().toString();
                 String password = ps.getText().toString();
                 if(username.isEmpty()){
                     un.setError("Please enter username!");
@@ -59,12 +92,44 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 } else if (username.isEmpty() && email.isEmpty() && password.isEmpty()){
                     Toast.makeText(SignUp.this,"Fields Are Empty!",Toast.LENGTH_SHORT);
                 }else if (!(username.isEmpty() && email.isEmpty() && password.isEmpty())){
+                    progressBar.setVisibility(View.VISIBLE);
                     mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
-                                Toast.makeText(SignUp.this,"SignUp Unsuccessful!",Toast.LENGTH_SHORT);
+                                Toast.makeText(SignUp.this,"SignUp Unsuccessful!!! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                             }else{
+                                FirebaseUser fUser = mFirebaseAuth.getCurrentUser();
+                                fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(SignUp.this, "Verification Email Has been Sent.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG, "onFailure: Email not sent " + e.getMessage());
+                                    }
+                                });
+                                Toast.makeText(SignUp.this, "User Created.", Toast.LENGTH_SHORT).show();
+                                userID = mFirebaseAuth.getCurrentUser().getUid();
+                                DocumentReference documentReference = mStore.collection("users").document(userID);
+                                Map<String,Object> user = new HashMap<>();
+                                user.put("userID",userID);
+                                user.put("username",username);
+                                user.put("email",email);
+                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG, "onFailure: " + e.toString());
+                                    }
+                                });
                                 finish();
                             }
                         }
@@ -72,12 +137,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 }else{
                     Toast.makeText(SignUp.this,"Error!!!",Toast.LENGTH_SHORT);
                 }
-
-                finish();
                 break;
             case R.id.sign_in_now:
-                /*Intent intent = new Intent(SignUp.this, LoginActivity.class);
-                startActivity(intent);*/
                 finish();
                 break;
         }

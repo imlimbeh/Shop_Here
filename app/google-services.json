@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750888247414:android:bf4459e613e17c1d817f57",
+        "mobilesdk_app_id": "1:750888247414:android:4dcd08efed453f9f817f57",
         "android_client_info": {
-          "package_name": "com.company.shophere"
+          "package_name": "com.example.shophere"
         }
       },
       "oauth_client": [
