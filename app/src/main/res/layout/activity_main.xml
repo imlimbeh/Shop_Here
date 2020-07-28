@@ -54,7 +54,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@android:drawable/dark_header"
-        android:onClick="btn_sign_up"
         android:text="@string/sign_up_text"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -62,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -70,8 +69,8 @@
         android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:background="@android:color/white"
-        android:hint="@string/prompt_username"
-        android:inputType="textShortMessage"
+        android:hint="@string/prompt_email"
+        android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <CheckBox
         android:id="@+id/stay_signin"
