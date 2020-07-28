@@ -1,24 +1,28 @@
 package com.example.shophere;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_REPLY ="com.example.android.shophere.REPLY";
 
     Button bCA, bSI;
     EditText un, em, ps;
+    FirebaseAuth mFirebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
         un = (EditText)findViewById(R.id.username);
         em = (EditText)findViewById(R.id.email);
         ps = (EditText)findViewById(R.id.password);
@@ -31,23 +35,25 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.create_account:
-                Intent replyIntent = new Intent();
-                if (TextUtils.isEmpty(un.getText())||TextUtils.isEmpty(em.getText())||TextUtils.isEmpty(ps.getText())) {
-                    setResult(RESULT_CANCELED, replyIntent);
-                } else {
-                    String username = un.getText().toString();
-                    String email = em.getText().toString();
-                    String password = ps.getText().toString();
-                    //User registerUser = new User(username,email,password);
-                    replyIntent.putExtra(EXTRA_REPLY, username);
-                    replyIntent.putExtra(EXTRA_REPLY, email);
-                    replyIntent.putExtra(EXTRA_REPLY, password);
-                    // Set the result status to indicate success.
-                    setResult(RESULT_OK, replyIntent);
+                String username = un.getText().toString();
+                String email = em.getText().toString();
+                String password = ps.getText().toString();
+                if(username.isEmpty()){
+                    un.setError("Please enter username");
+                    un.requestFocus();
+                }else if (email.isEmpty()){
+                    em.setError("Please enter email");
+                    em.requestFocus();
+                }else if (password.isEmpty()){
+                    ps.setError("Please enter password");
+                    ps.requestFocus();
+                }else if (username.isEmpty() && email.isEmpty() && password.isEmpty()){
+                    Toast.makeText(SignUp.this,"Fields Are Empty!",Toast.LENGTH_SHORT);
+                }else if (!(username.isEmpty() && email.isEmpty() && password.isEmpty())){
+                    mFirebaseAuth.createUserWithEmailAndPassword(email,password)
                 }
-                finish();
 
-                //User registerUser = new User(username,email,password);
+                finish();
                 break;
             case R.id.sign_in_now:
                 /*Intent intent = new Intent(SignUp.this, LoginActivity.class);
