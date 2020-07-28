@@ -9,10 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shophere.ui.login.LoginActivity;
-
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
-    private UserViewModel userViewModel;
     public static final String EXTRA_REPLY ="com.example.android.shophere.REPLY";
 
     Button bCA, bSI;
@@ -53,8 +50,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 //User registerUser = new User(username,email,password);
                 break;
             case R.id.sign_in_now:
-                Intent intent = new Intent(SignUp.this, LoginActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(SignUp.this, LoginActivity.class);
+                startActivity(intent);*/
+                finish();
                 break;
         }
     }
