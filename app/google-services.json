@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "750888247414",
+    "firebase_url": "https://shophere-dd2a2.firebaseio.com",
+    "project_id": "shophere-dd2a2",
+    "storage_bucket": "shophere-dd2a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750888247414:android:bf4459e613e17c1d817f57",
+        "android_client_info": {
+          "package_name": "com.company.shophere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750888247414-pgvp95oqbi1pu27hcianpmbg9nkoree2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmR-sH731sFjyVdE52Gf5tLRHjjz7LSRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750888247414-pgvp95oqbi1pu27hcianpmbg9nkoree2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
