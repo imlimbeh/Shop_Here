@@ -1,9 +1,12 @@
 package com.example.shophere;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    CheckBox stay;
     EditText em, ps;
     Button bL, bSU;
     FirebaseAuth mFirebaseAuth;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         ps = (EditText)findViewById(R.id.password);
         bL = (Button)findViewById(R.id.login);
         bSU = (Button)findViewById(R.id.sign_up);
+        stay = (CheckBox)findViewById(R.id.stay_signin);
         progressBar = findViewById(R.id.progressBar);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Fields Are Empty!",Toast.LENGTH_SHORT);
                 }else if (!(email.isEmpty() && password.isEmpty())){
                     progressBar.setVisibility(View.VISIBLE);
+                    bL.setVisibility(View.GONE);
                     mFirebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -80,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                             }else{
                                 Toast.makeText(MainActivity.this, "Login Failed!!! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
+                                bL.setVisibility(View.VISIBLE);
                             }
                         }
                     });
@@ -96,10 +103,47 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(signUpPage);
             }
         });
+
+        stay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("stayLogged","true");
+                    editor.apply();
+                }else if (!compoundButton.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("stayLogged","false");
+                    editor.apply();
+                }
+            }
+        });
+        // stay logged in
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("stayLogged", "");
+        if (checkbox.equals("false")){
+            // Logout
+            FirebaseAuth.getInstance().signOut();
+            // Set stay logged checkbox
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("stayLogged","false");
+            editor.apply();
+        }
     }
     @Override
     protected void onStart(){
         super.onStart();
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent exit = new Intent(Intent.ACTION_MAIN);
+        exit.addCategory(Intent.CATEGORY_HOME);
+        exit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(exit);
+        finish();
     }
 }

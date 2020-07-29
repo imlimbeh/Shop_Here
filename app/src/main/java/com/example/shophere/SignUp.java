@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = "TAG";
     Button bCA, bSI;
+    TextView t;
     EditText un, em, ps;
     FirebaseAuth mFirebaseAuth;
     FirebaseFirestore mStore;
@@ -52,6 +54,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         bCA = (Button)findViewById(R.id.create_account);
         bSI = (Button)findViewById(R.id.sign_in_now);
         progressBar = findViewById(R.id.progressBar);
+        t = (TextView)findViewById(R.id.or);
         showPassword = (CheckBox)findViewById(R.id.show_password);
 
         showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -93,12 +96,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     Toast.makeText(SignUp.this,"Fields Are Empty!",Toast.LENGTH_SHORT);
                 }else if (!(username.isEmpty() && email.isEmpty() && password.isEmpty())){
                     progressBar.setVisibility(View.VISIBLE);
+                    bCA.setVisibility(View.GONE);
+                    t.setVisibility(View.GONE);
+                    bSI.setVisibility(View.GONE);
                     mFirebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
                                 Toast.makeText(SignUp.this,"SignUp Unsuccessful!!! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
+                                bCA.setVisibility(View.VISIBLE);
+                                t.setVisibility(View.VISIBLE);
+                                bSI.setVisibility(View.VISIBLE);
                             }else{
                                 FirebaseUser fUser = mFirebaseAuth.getCurrentUser();
                                 fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {

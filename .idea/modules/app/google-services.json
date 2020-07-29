@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "528360002028",
+    "firebase_url": "https://shop-here-74a36.firebaseio.com",
+    "project_id": "shop-here-74a36",
+    "storage_bucket": "shop-here-74a36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528360002028:android:73279e897bc859961170c9",
+        "android_client_info": {
+          "package_name": "com.example.shophere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528360002028-gagarolmu3bjtjp7dsmsk1drjuqf0f2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shophere",
+            "certificate_hash": "d86cca2b6b9aeab88fcf44a644b89e815bb7e824"
+          }
+        },
+        {
+          "client_id": "528360002028-oaqnu5p27rl8v552ggl8j200ahglgdq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJRwT_SlhG_Z7tTSdHGHRCoaGrwNP95pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528360002028-oaqnu5p27rl8v552ggl8j200ahglgdq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
