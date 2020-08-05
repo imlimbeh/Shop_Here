@@ -131,7 +131,12 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("stayLogged","false");
             editor.apply();
         }
+
+
     }
+
+
+
     @Override
     protected void onStart(){
         super.onStart();
@@ -146,4 +151,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(exit);
         finish();
     }
+
+
 }
