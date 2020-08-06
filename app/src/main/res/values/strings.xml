@@ -137,4 +137,16 @@
     <string name="software">Software</string>
     <string name="video_games">Video Games</string>
     <string name="log_out">Log Out</string>
+    <string name="search">Search</string>
+    <string name="camera">Camera</string>
+    <string name="mic">Mic</string>
+    <string name="home">Home</string>
+    <string name="recent">Recent</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="menu">Menu</string>
+    <string name="profile">Profile</string>
+    <string name="notification">Notification</string>
+    <string name="about">About</string>
+    <string name="camera">Camera</string>
+    <string name="mic">Mic</string>
 </resources>

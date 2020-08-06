@@ -4,18 +4,18 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home"/>
+        android:title="@string/home"/>
     <item
         android:id="@+id/nav_restore"
         android:icon="@drawable/ic_baseline_restore_24"
-        android:title="Recent"/>
+        android:title="@string/recent"/>
     <item
         android:id="@+id/nav_shopping_cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="Shopping Cart"/>
+        android:title="@string/shopping_cart"/>
     <item
         android:id="@+id/nav_menu"
         android:icon="@drawable/ic_baseline_menu_24"
-        android:title="Menu"/>
+        android:title="@string/menu"/>
 
 </menu>
