@@ -1,17 +1,17 @@
 package com.example.shophere;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainStore extends AppCompatActivity {
     Button bLOUT;
@@ -22,29 +22,13 @@ public class MainStore extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_store);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         // Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setSelectedItemId(R.id.nav_home);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        bLOUT= (Button)findViewById(R.id.logout);
-        bLOUT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Logout
-                FirebaseAuth.getInstance().signOut();
-                // For Stay Logged in
-                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("stayLogged","false");
-                editor.apply();
-                // Go Back
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
-            }
-        });
     }
 
     @Override
@@ -53,8 +37,10 @@ public class MainStore extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish();
+        finishAffinity();
+        System.exit(0);
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -62,12 +48,11 @@ public class MainStore extends AppCompatActivity {
 
             switch (item.getItemId()){
                 case R.id.nav_home:
-                    Intent choose = new Intent(MainStore.this, MainStore.class);
-                    startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    Intent restore = new Intent(MainStore.this, MainActivity.class);
-                    startActivity(restore);
+                    //Intent restore = new Intent(MainStore.this, <?>.class);
+                    //startActivity(restore);
+                    Toast.makeText(MainStore.this, "Building!!",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_shopping_cart:
                     Intent shopping = new Intent(MainStore.this, Shopping_cart.class);

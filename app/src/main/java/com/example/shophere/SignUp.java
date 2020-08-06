@@ -1,5 +1,6 @@
 package com.example.shophere;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -139,6 +140,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                         Log.d(TAG, "onFailure: " + e.toString());
                                     }
                                 });
+                                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("stayLogged","false");
+                                editor.apply();
                                 finish();
                             }
                         }

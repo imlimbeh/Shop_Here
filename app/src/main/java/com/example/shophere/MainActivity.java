@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     CheckBox stay;
+    Boolean tf;
     EditText em, ps;
     Button bL, bSU;
     FirebaseAuth mFirebaseAuth;
@@ -41,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
         bSU = (Button)findViewById(R.id.sign_up);
         stay = (CheckBox)findViewById(R.id.stay_signin);
         progressBar = findViewById(R.id.progressBar);
+
+        // stay logged in
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("stayLogged", "");
+        if (checkbox.equals("false")){
+            // Logout
+            FirebaseAuth.getInstance().signOut();
+            // Set stay logged checkbox
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("stayLogged","true");
+            editor.apply();
+        }
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -120,19 +133,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        // stay logged in
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        String checkbox = preferences.getString("stayLogged", "");
-        if (checkbox.equals("false")){
-            // Logout
-            FirebaseAuth.getInstance().signOut();
-            // Set stay logged checkbox
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("stayLogged","false");
-            editor.apply();
-        }
-
-
     }
 
 
@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
         exit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(exit);
         finish();
+        System.exit(0);
     }
-
-
 }

@@ -7,22 +7,29 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Shopping_cart extends AppCompatActivity {
 
+    FirebaseAuth mFirebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         // Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setSelectedItemId(R.id.nav_shopping_cart);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
 
@@ -40,12 +47,11 @@ public class Shopping_cart extends AppCompatActivity {
                     startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    Intent restore = new Intent(Shopping_cart.this, MainActivity.class);
-                    startActivity(restore);
+                    //Intent restore = new Intent(MainStore.this, <?>.class);
+                    //startActivity(restore);
+                    Toast.makeText(Shopping_cart.this, "Building!!",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_shopping_cart:
-                    Intent shopping = new Intent(Shopping_cart.this, Shopping_cart.class);
-                    startActivity(shopping);
                     break;
                 case R.id.nav_menu:
                     Intent menu = new Intent(Shopping_cart.this, MenuBar.class);
