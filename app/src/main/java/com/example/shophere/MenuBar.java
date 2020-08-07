@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,11 +22,17 @@ import com.google.firebase.auth.FirebaseUser;
 public class MenuBar extends AppCompatActivity {
 
     FirebaseAuth mFirebaseAuth;
+    Boolean bSC, bA, bS;
+    LinearLayout lSBC, lA, lS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_bar);
+
+        bSC = false;
+        bA = false;
+        bS = false;
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -126,6 +133,36 @@ public class MenuBar extends AppCompatActivity {
                 break;
         }
     }
+    public void onClickShopCategories(View view){
+        lSBC = findViewById(R.id.layout_shopbycategories);
+        if (bSC){
+            lSBC.setVisibility(View.GONE);
+            bSC = false;
+        }else{
+            lSBC.setVisibility(View.VISIBLE);
+            bSC = true;
+        }
+    }
+    public void onClickAccount(View view){
+        lA = findViewById(R.id.layout_account);
+        if(bA){
+            lA.setVisibility(View.GONE);
+            bA = false;
+        }else{
+            lA.setVisibility(View.VISIBLE);
+            bA = true;
+        }
+    }
+    public void onClickSetting(View view){
+        lS = findViewById(R.id.layout_setting);
+        if (bS){
+            lS.setVisibility(View.GONE);
+            bS = false;
+        }else{
+            lS.setVisibility(View.VISIBLE);
+            bS = true;
+        }
+    }
     public void logout(View view){
         // Logout
         mFirebaseAuth.signOut();
@@ -138,4 +175,5 @@ public class MenuBar extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
         finishAffinity();
     }
+
 }
