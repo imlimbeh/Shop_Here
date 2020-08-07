@@ -109,7 +109,7 @@ public class MenuBar extends AppCompatActivity {
             case R.id.homeKitchen:
                 //page = new Intent(MenuBar.this, <?>.class);
                 //startActivity(page);
-                Toast.makeText(MenuBar.this, "Home Kitchen !!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuBar.this, "home Kitchen !!!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.movieTelevision:
                 //page = new Intent(MenuBar.this, <?>.class);
