@@ -18,13 +18,14 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         view = itemView;
     }
-    public void setdetails(Context ct, String pn, String pi, String pp){
+    public void setdetails(Context ct, String pn, String pi, /*String pp*/ double pp){
         TextView text_productName = view.findViewById(R.id.productName);
         TextView text_productPrice = view.findViewById(R.id.productPrice);
         ImageView image_product = view.findViewById(R.id.productImage);
 
         text_productName.setText(pn);
-        text_productPrice.setText(pp);
+        text_productPrice.setText("RM "+String.valueOf(pp));
+        //text_productPrice.setText(pp);
         Picasso.get().load(pi).into(image_product);
 
         Animation animation = AnimationUtils.loadAnimation(ct, android.R.anim.slide_in_left);

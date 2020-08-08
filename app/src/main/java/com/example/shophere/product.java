@@ -1,7 +1,8 @@
 package com.example.shophere;
 
 public class product {
-    String product_name, product_image, product_price;
+    String product_name, product_image;
+    double product_price;
     public product(){
 
     }
@@ -22,11 +23,20 @@ public class product {
         this.product_image = product_image;
     }
 
+    /*
     public String getProduct_price() {
         return product_price;
     }
 
     public void setProduct_price(String product_price) {
+        this.product_price = product_price;
+    }*/
+
+    public double getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(double product_price) {
         this.product_price = product_price;
     }
 }

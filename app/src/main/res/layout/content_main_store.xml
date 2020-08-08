@@ -23,7 +23,6 @@
             android:background="@drawable/rounded3"
             android:layout_gravity="center"
             android:gravity="bottom"
-            android:iconifiedByDefault="false"
             android:queryHint="Search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
@@ -59,3 +58,7 @@
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+search view
+android:iconifiedByDefault="false"
+-->

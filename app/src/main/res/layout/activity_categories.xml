@@ -23,7 +23,6 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded3"
             android:gravity="bottom"
-            android:iconifiedByDefault="false"
             android:queryHint="Search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
