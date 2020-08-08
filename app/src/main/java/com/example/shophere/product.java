@@ -23,15 +23,6 @@ public class product {
         this.product_image = product_image;
     }
 
-    /*
-    public String getProduct_price() {
-        return product_price;
-    }
-
-    public void setProduct_price(String product_price) {
-        this.product_price = product_price;
-    }*/
-
     public double getProduct_price() {
         return product_price;
     }
