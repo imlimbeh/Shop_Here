@@ -151,4 +151,11 @@
     <string name="mic">Mic</string>
     <string name="mainstore_title">Video Game Accessories</string>
     <string name="shop_now_text">Shop Now</string>
+    <string name="instock_text">In Stock</string>
+    <string name="outstock_text">Out of Stock</string>
+    <string name="quantity_text">Quantity : </string>
+    <string name="about_us_text">About US</string>
+    <string name="description_text">Description</string>
+    <string name="features_detail_text"><![CDATA[Features & Detail]]></string>
+    <string name="product_details_text">Product Details</string>
 </resources>

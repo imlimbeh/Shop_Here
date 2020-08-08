@@ -3,6 +3,9 @@ package com.example.shophere;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Categories extends AppCompatActivity {
 
+    String message;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     RecyclerView recyclerView;
@@ -32,7 +36,7 @@ public class Categories extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference("product_videogames");
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MenuBar.EXTRA_MESSAGE);
+        message = intent.getStringExtra(MenuBar.EXTRA_MESSAGE);
         switch (message){
             case "videogames":
                 databaseReference = firebaseDatabase.getReference("product_videogames");
@@ -81,7 +85,29 @@ public class Categories extends AppCompatActivity {
                 ){
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, product product, int i) {
-                        viewHolder.setdetails(getApplicationContext(),product.getProduct_name(), product.getProduct_image(),product.getProduct_price());
+                        viewHolder.setdetails(getApplicationContext(), product.getProduct_id(), product.getProduct_name(), product.getProduct_image(),product.getProduct_price());
+                    }
+
+                    @Override
+                    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                        ViewHolder viewHolder = super.onCreateViewHolder(parent,viewType);
+                        viewHolder.setOnclickListener(new ViewHolder.ClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                TextView id = view.findViewById(R.id.productID);
+                                String mid = id.getText().toString();
+
+                                Intent intent = new Intent(view.getContext(), ProductOverview.class);
+                                intent.putExtra("id", mid);
+                                intent.putExtra("type", message);
+                                startActivity(intent);;
+                            }
+                            @Override
+                            public void onItemLongClick(View view, int position) {
+
+                            }
+                        });
+                        return viewHolder;
                     }
                 };
         recyclerView.setAdapter(firebaseRecyclerAdapter);

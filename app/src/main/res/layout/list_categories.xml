@@ -34,6 +34,13 @@
             android:paddingLeft="10dp">
 
             <TextView
+                android:id="@+id/productID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/productName"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"

@@ -7,7 +7,7 @@
     tools:context="com.example.shophere.SignUp">
 
     <ImageView
-        android:id="@+id/productImage"
+        android:id="@+id/productOverviewImage"
         android:layout_width="71dp"
         android:layout_height="72dp"
         android:contentDescription="@string/shop_name_text"
@@ -27,7 +27,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productImage" />
+        app:layout_constraintTop_toBottomOf="@+id/productOverviewImage" />
 
     <EditText
         android:id="@+id/username"
