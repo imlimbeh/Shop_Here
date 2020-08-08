@@ -24,6 +24,8 @@ public class MenuBar extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     Boolean bSC, bA, bS;
     LinearLayout lSBC, lA, lS;
+    public static final String EXTRA_MESSAGE = "com.example.shophere.extra.MESSAGE";
+    public static final int TEXT_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class MenuBar extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        Toast.makeText(MenuBar.this, mFirebaseUser.getEmail(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MenuBar.this, mFirebaseUser.getEmail(),Toast.LENGTH_SHORT).show();
 
         // Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -74,7 +76,7 @@ public class MenuBar extends AppCompatActivity {
         }
     };
     public void onClickChoose(View view){
-        Intent page;
+        Intent page = new Intent(MenuBar.this, Categories.class);
         switch (view.getId()){
             case R.id.AllCategories:
                 //page = new Intent(MenuBar.this, <?>.class);
@@ -127,9 +129,8 @@ public class MenuBar extends AppCompatActivity {
                 Toast.makeText(MenuBar.this, "Software !!!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.videogames:
-                //page = new Intent(MenuBar.this, <?>.class);
-                //startActivity(page);
-                Toast.makeText(MenuBar.this, "Video Games !!!", Toast.LENGTH_SHORT).show();
+                page.putExtra(EXTRA_MESSAGE, "videogames");
+                startActivityForResult(page, TEXT_REQUEST);
                 break;
         }
     }
