@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16sp"
                     android:gravity="center_horizontal"
-                    android:onClick="onClickChoose"
+                    android:textStyle="bold"
                     android:text="@string/all_categories"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"

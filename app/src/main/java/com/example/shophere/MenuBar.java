@@ -78,11 +78,6 @@ public class MenuBar extends AppCompatActivity {
     public void onClickChoose(View view){
         Intent page = new Intent(MenuBar.this, Categories.class);
         switch (view.getId()){
-            case R.id.AllCategories:
-                //page = new Intent(MenuBar.this, <?>.class);
-                //startActivity(page);
-                Toast.makeText(MenuBar.this, "All Categories !!!", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.ArtCraft:
                 //page = new Intent(MenuBar.this, <?>.class);
                 //startActivity(page);

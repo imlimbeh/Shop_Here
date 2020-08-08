@@ -3,6 +3,7 @@ package com.example.shophere;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class MainStore extends AppCompatActivity {
+    public static final String EXTRA_MESSAGE = "com.example.shophere.extra.MESSAGE";
+    public static final int TEXT_REQUEST = 1;
     Button bLOUT;
     ImageView i1,i2,i3;
     FirebaseAuth mFirebaseAuth;
@@ -125,5 +128,10 @@ public class MainStore extends AppCompatActivity {
 
             }
         });
+    }
+    public void onClickShopNow(View view){
+        Intent page = new Intent(MainStore.this, Categories.class);
+        page.putExtra(EXTRA_MESSAGE, "videogames");
+        startActivityForResult(page, TEXT_REQUEST);
     }
 }
