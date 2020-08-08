@@ -6,11 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".ProductOverview">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/top_bar"
+        app:menu="@menu/search_bar">
+
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="356dp"
+            android:layout_height="39dp"
+            android:background="@drawable/rounded3"
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:queryHint="Search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </SearchView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="28dp"
+            android:contentDescription="@string/camera_text"
+            android:src="@drawable/ic_baseline_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginRight="28dp"
+            android:layout_gravity="right"
+            android:contentDescription="@string/mic_text"
+            android:src="@drawable/ic_baseline_mic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded"
+        app:itemIconTint="@color/nav_color"
+        app:itemTextColor="@color/nav_color"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation" />
+
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="14dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,37 +99,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ID"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/productOverviewName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
                 android:text="Name"
+                android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:paddingHorizontal="16dp"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/productOverviewImage"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:paddingHorizontal="16dp"/>
+                android:paddingHorizontal="16dp" />
 
             <TextView
                 android:id="@+id/productOverviewPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
                 android:text="Price"
-                android:textStyle="bold"
-                android:paddingHorizontal="16dp"/>
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/quanlityStock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/id_gotStock"
@@ -60,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 android:text="@string/instock_text"
+                android:textColor="#41A543"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -70,10 +150,17 @@
 
                 <TextView
                     android:id="@+id/id_quantity_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
-                    android:text="@string/quantity_text" />
+                    android:text="@string/quantity_text"
+                    android:textColor="@android:color/black" />
+
+                <Spinner
+                    android:id="@+id/quantity"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,15 +174,19 @@
                     android:id="@+id/addChart"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:background="#66FFCC00"
                     android:paddingHorizontal="16dp"
-                    android:text="Add to Chart" />
+                    android:text="Add to Chart"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/buynow"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:background="#FFCC00"
                     android:paddingHorizontal="16dp"
-                    android:text="Buy Now" />
+                    android:text="Buy Now"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -103,6 +194,7 @@
                 android:id="@+id/Text_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
                 android:paddingTop="80dp"
                 android:text="@string/about_us_text"
                 android:textColor="@android:color/black"
@@ -114,12 +206,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingHorizontal="16dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/Text_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp"
                 android:text="@string/description_text"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -129,12 +224,15 @@
                 android:id="@+id/id_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/Text_featuresNDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp"
                 android:text="@string/features_detail_text"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -144,12 +242,15 @@
                 android:id="@+id/id_featuresndetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/Text_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="8dp"
                 android:text="@string/product_details_text"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -159,6 +260,7 @@
                 android:id="@+id/id_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
                 android:text="TextView" />
 
         </LinearLayout>

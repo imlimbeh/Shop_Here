@@ -1,14 +1,20 @@
 package com.example.shophere;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,10 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class ProductOverview extends AppCompatActivity {
+    private Spinner spinner;
+    private ArrayList<String> arrayList = new ArrayList<>();
     TextView name, price, id, stock, aboutUs, description, detail, featuresNDetails;
     ImageView image;
-    int stockQ;
+    int stockQ, i;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference;
     private DatabaseReference findName, findImage, findPrice, findStock, findAboutUs, findDescription, findDetail, findFeaturesNDetail;
@@ -54,7 +64,37 @@ public class ProductOverview extends AppCompatActivity {
         findDescription = databaseReference.child(productid).child("product_description");
         findDetail = databaseReference.child(productid).child("product_detail");
         findFeaturesNDetail = databaseReference.child(productid).child("product_featuresNdetails");
+
+        // Bottom Navigation
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setSelectedItemId(R.id.nav_menu);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            switch (item.getItemId()){
+                case R.id.nav_home:
+                    Intent choose = new Intent(ProductOverview.this, MainStore.class);
+                    startActivity(choose);
+                    break;
+                case R.id.nav_restore:
+                    //Intent restore = new Intent(MainStore.this, <?>.class);
+                    //startActivity(restore);
+                    Toast.makeText(ProductOverview.this, "Building!!",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.nav_shopping_cart:
+                    Intent shopping = new Intent(ProductOverview.this, Shopping_cart.class);
+                    startActivity(shopping);
+                    break;
+                case R.id.nav_menu:
+                    break;
+            }
+            return true;
+        }
+    };
 
     @Override
     protected void onStart() {
@@ -110,6 +150,13 @@ public class ProductOverview extends AppCompatActivity {
                     textStock.setText(R.string.instock_text);
                     hs1.setVisibility(View.VISIBLE);
                     hs2.setVisibility(View.VISIBLE);
+                    spinner = findViewById(R.id.quantity);
+                    arrayList.clear();
+                    for (i = 1; i<=stockQ; i++){
+                        arrayList.add(String.valueOf(i));
+                    }
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ProductOverview.this, R.layout.style_spinner, arrayList);
+                    spinner.setAdapter(arrayAdapter);
                 }
             }
 
@@ -122,7 +169,7 @@ public class ProductOverview extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                aboutUs.setText(value);
+                aboutUs.setText(value.replace("\\n", "\n"));
             }
 
             @Override
@@ -146,7 +193,7 @@ public class ProductOverview extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                detail.setText(value);
+                detail.setText(value.replace("\\n","\n"));
             }
 
             @Override
@@ -158,7 +205,7 @@ public class ProductOverview extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                featuresNDetails.setText(value);
+                featuresNDetails.setText("• "+value.replace("&", "\n• "));
             }
 
             @Override
