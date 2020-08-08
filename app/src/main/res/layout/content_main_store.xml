@@ -123,6 +123,7 @@
 
     <TextView
         android:id="@+id/id_shopnow"
+        android:background="@drawable/rounded3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -132,10 +133,22 @@
         android:layout_marginRight="16dp"
         android:text="@string/shop_now_text"
         android:textSize="18sp"
+        android:textColor="#0E7C98"
         android:onClick="onClickShopNow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PI1" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:src="@drawable/ic_baseline_arrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 <!--
