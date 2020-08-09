@@ -90,6 +90,8 @@ public class ProductOverview extends AppCompatActivity {
                     startActivity(shopping);
                     break;
                 case R.id.nav_menu:
+                    Intent menu = new Intent(ProductOverview.this, MenuBar.class);
+                    startActivity(menu);
                     break;
             }
             return true;
