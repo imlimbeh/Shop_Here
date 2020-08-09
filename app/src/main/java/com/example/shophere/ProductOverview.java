@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,16 +30,20 @@ public class ProductOverview extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<>();
     TextView name, price, id, stock, aboutUs, description, detail, featuresNDetails;
     ImageView image;
-    int stockQ, i;
+    int stockQ, i, num;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference;
-    private DatabaseReference findName, findImage, findPrice, findStock, findAboutUs, findDescription, findDetail, findFeaturesNDetail;
+    private DatabaseReference findName, findImage, findPrice, findStock, findAboutUs, findDescription, findDetail, findFeaturesNDetail, findNumShoppingCart;
+    FirebaseAuth mFirebaseAuth;
+    FirebaseDatabase db;
+    DatabaseReference myShoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_overview);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
         id = (TextView)findViewById(R.id.productOverviewID);
         name = (TextView)findViewById(R.id.productOverviewName);
         price = (TextView)findViewById(R.id.productOverviewPrice);
@@ -215,5 +220,38 @@ public class ProductOverview extends AppCompatActivity {
 
             }
         });
+        findNumShoppingCart = firebaseDatabase.getReference("IDNumStore").child("shoppingCartNum");
+        findNumShoppingCart.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                num = dataSnapshot.getValue(int.class);
+                num += 1;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void onAddCart(View view){
+
+        String shoppingCart_id = "SC" + (num);
+        String userID = mFirebaseAuth.getCurrentUser().getUid();
+        String productID = id.getText().toString();
+        Spinner q = (Spinner)findViewById(R.id.quantity);
+        int productQuantity = Integer.valueOf(q.getSelectedItem().toString());
+        db = FirebaseDatabase.getInstance();
+        myShoppingCart = db.getReference("shopping_cart").child(shoppingCart_id);
+        myShoppingCart.child("shoppingCart_id").setValue(shoppingCart_id);
+        myShoppingCart.child("userID").setValue(userID);
+        myShoppingCart.child("product_id").setValue(productID);
+        myShoppingCart.child("quantity").setValue(productQuantity);
+
+        db.getReference("IDNumStore").child("shoppingCartNum").setValue(num);
+        finish();
+    }
+    public void onBuyNow(View view){
+
     }
 }

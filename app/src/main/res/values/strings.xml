@@ -163,9 +163,6 @@
     <string name="enter_your_credit_card_information">Enter your credit card information</string>
     <string name="scan_your_card">Scan your card</string>
     <string name="run">run</string>
-    <string name="or2">------------------------------------------ or ------------------------------------------</string>
-    <string name="name_on_card">Name on card</string>
-    <string name="name_on_card">Name on card</string>
-    <string name="card_number">Card number</string>
+    <string name="or2">------------------------------------------- or ------------------------------------------</string>
 
 </resources>
