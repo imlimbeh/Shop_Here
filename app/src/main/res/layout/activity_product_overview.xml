@@ -174,22 +174,23 @@
 
                 <Button
                     android:id="@+id/addChart"
-                    android:layout_width="170dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:background="#66FFCC00"
+                    android:onClick="onAddCart"
                     android:paddingHorizontal="16dp"
                     android:text="@string/add_to_cart_text"
-                    android:onClick="onAddCart"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/buynow"
-                    android:layout_width="170dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
                     android:background="#FFCC00"
+                    android:onClick="onBuyNow"
                     android:paddingHorizontal="16dp"
                     android:text="@string/buy_now_text"
-                    android:onClick="onBuyNow"
                     android:textStyle="bold" />
 
             </LinearLayout>

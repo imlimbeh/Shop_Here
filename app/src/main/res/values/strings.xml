@@ -168,5 +168,6 @@
     <string name="add_to_cart_text">Add to Cart</string>
     <string name="subtotal_text">Subtotal </string>
     <string name="no_item_in_you_cart">No Item In you cart</string>
+    <string name="delete_text">Delete</string>
 
 </resources>

@@ -152,7 +152,7 @@ public class ProductOverview extends AppCompatActivity {
                 if (stockQ == 0){
                     textStock.setText(R.string.outstock_text);
                     hs1.setVisibility(View.GONE);
-                    hs2.setVisibility(View.GONE);;
+                    hs2.setVisibility(View.GONE);
                 } else{
                     textStock.setText(R.string.instock_text);
                     hs1.setVisibility(View.VISIBLE);
