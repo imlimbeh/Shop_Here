@@ -6,4 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".payment_detail">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/top_bar"
+        android:layout_width="408dp"
+        android:layout_height="68dp"
+        android:background="@drawable/rounded2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/search_bar">
+
+        <TextView
+            android:id="@+id/paymentdetailtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/enter_payment_details"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="28dp"
+            android:textSize="10dp"
+            android:text="@string/cancel"
+            android:layout_marginStart="15dp" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

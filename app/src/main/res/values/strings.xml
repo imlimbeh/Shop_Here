@@ -158,4 +158,7 @@
     <string name="description_text">Description</string>
     <string name="features_detail_text"><![CDATA[Features & Detail]]></string>
     <string name="product_details_text">Product Details</string>
+    <string name="enter_payment_details">Enter Payment Details</string>
+    <string name="cancel">CANCEL</string>
+
 </resources>
