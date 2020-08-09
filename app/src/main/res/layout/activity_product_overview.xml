@@ -178,7 +178,8 @@
                     android:layout_height="wrap_content"
                     android:background="#66FFCC00"
                     android:paddingHorizontal="16dp"
-                    android:text="Add to Chart"
+                    android:text="@string/add_to_cart_text"
+                    android:onClick="onAddCart"
                     android:textStyle="bold" />
 
                 <Button
@@ -187,7 +188,8 @@
                     android:layout_height="wrap_content"
                     android:background="#FFCC00"
                     android:paddingHorizontal="16dp"
-                    android:text="Buy Now"
+                    android:text="@string/buy_now_text"
+                    android:onClick="onBuyNow"
                     android:textStyle="bold" />
 
             </LinearLayout>

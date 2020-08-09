@@ -164,5 +164,9 @@
     <string name="scan_your_card">Scan your card</string>
     <string name="run">run</string>
     <string name="or2">------------------------------------------- or ------------------------------------------</string>
+    <string name="buy_now_text">Buy Now</string>
+    <string name="add_to_cart_text">Add to Cart</string>
+    <string name="subtotal_text">Subtotal </string>
+    <string name="no_item_in_you_cart">No Item In you cart</string>
 
 </resources>
