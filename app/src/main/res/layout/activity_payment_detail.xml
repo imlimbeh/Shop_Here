@@ -6,4 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".payment_detail">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/top_bar"
+        android:layout_width="408dp"
+        android:layout_height="68dp"
+        android:background="@drawable/rounded2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/search_bar">
+
+        <TextView
+            android:id="@+id/paymentdetailtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/enter_payment_details"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/cancel"
+            android:textSize="10sp"
+            android:layout_marginStart="15dp" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:id="@+id/textcreditcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/enter_your_credit_card_information"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="376dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/scancardbar"
+        android:background="@drawable/rounded4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcreditcard">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="11dp"
+            android:text="@string/scan_your_card"
+            android:textColor="#000000" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="11dp"
+            android:contentDescription="@string/run"
+            android:src="@drawable/ic_baseline_arrow" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="11dp"
+            android:contentDescription="@string/camera"
+            android:src="@drawable/ic_baseline_camera" />
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:id="@+id/or2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/or2"
+        android:textSize="15sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scancardbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
