@@ -24,11 +24,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,6 +39,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
     String userID;
     CheckBox showPassword;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,22 +124,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                 });
                                 Toast.makeText(SignUp.this, "User Created.", Toast.LENGTH_SHORT).show();
                                 userID = mFirebaseAuth.getCurrentUser().getUid();
-                                DocumentReference documentReference = mStore.collection("users").document(userID);
-                                Map<String,Object> user = new HashMap<>();
-                                user.put("userID",userID);
-                                user.put("username",username);
-                                user.put("email",email);
-                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d(TAG, "onFailure: " + e.toString());
-                                    }
-                                });
+                                database = FirebaseDatabase.getInstance();
+                                myRef = database.getReference("users").child(userID);
+                                myRef.child("userID").setValue(userID);
+                                myRef.child("username").setValue(username);
+                                myRef.child("email").setValue(email);
                                 SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putString("stayLogged","false");
