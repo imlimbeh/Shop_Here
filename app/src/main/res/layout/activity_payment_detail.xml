@@ -114,43 +114,83 @@
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/or2">
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cardname"
-            android:text="@string/name_on_card"
+            android:hint="@string/name_on_card"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="11dp"
             android:layout_marginLeft="10dp" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/carddetailsbar2"
         android:layout_width="376dp"
         android:layout_height="44dp"
-        android:id="@+id/carddetailsbar2"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carddetailsbar">
 
-        <TextView
+        <EditText
+            android:id="@+id/cardnumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cardnumber"
-            android:text="@string/card_number"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="10dp" />
+            android:hint="@string/card_number"
+            android:layout_marginLeft="10dp"
+            android:inputType="number"
+            android:layout_marginStart="10dp" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+    <TextView
+        android:id="@+id/textcreditcard2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expiration_date"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/carddetailsbar2" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/carddetailsbar3"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcreditcard2">
 
+        <Spinner
+            android:id="@+id/cardmonth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/carddetailsbar4"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textcreditcard2">
 
-
-
-
+        <Spinner
+            android:id="@+id/cardyear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.constraintlayout.widget.ConstraintLayout>

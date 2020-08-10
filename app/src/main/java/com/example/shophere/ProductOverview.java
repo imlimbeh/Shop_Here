@@ -252,6 +252,8 @@ public class ProductOverview extends AppCompatActivity {
         finish();
     }
     public void onBuyNow(View view){
+        Intent intent=new Intent(ProductOverview.this, payment_detail.class);
+        startActivity(intent);
 
     }
 }

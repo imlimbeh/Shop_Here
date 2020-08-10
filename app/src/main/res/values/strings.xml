@@ -171,4 +171,5 @@
     <string name="delete_text">Delete</string>
     <string name="name_on_card">Name On Card</string>
     <string name="card_number">Card Number</string>
+    <string name="expiration_date">Expiration date</string>
 </resources>
