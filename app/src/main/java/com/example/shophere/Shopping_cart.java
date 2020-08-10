@@ -7,10 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,20 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 public class Shopping_cart extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference, dr, dRef;
-    TextView text_productName, text_productPrice, text_quantity;
-    ImageView image_product;
-    Spinner spinner;
-    private ArrayList<String> arrayList = new ArrayList<>();
     String userID, currentUserID;
     String pn,pi;
     double pp;
-    int numStock, q;
+    int numStock;
 
     FirebaseAuth mFirebaseAuth;
 
@@ -109,7 +99,7 @@ public class Shopping_cart extends AppCompatActivity {
                             databaseReference
                     ) {
                         @Override
-                        protected void populateViewHolder(ShoppingViewHolder shoppingViewHolder, product_ShoppingCart product, int i) {
+                        protected void populateViewHolder(final ShoppingViewHolder shoppingViewHolder, final product_ShoppingCart product, int i) {
                             currentUserID = mFirebaseAuth.getCurrentUser().getUid();
                             userID = product.getUserID();
                             if(currentUserID.equals(userID)) {
@@ -120,11 +110,15 @@ public class Shopping_cart extends AppCompatActivity {
                                         dr = firebaseDatabase.getReference("product_videogames");
                                 }
                                 dRef = dr.child(product.getProduct_id());
-                                dRef.child("product_name").addValueEventListener(new ValueEventListener() {
+                                dRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        //text_productName = (TextView)findViewById(R.id.productName);
-                                        pn = dataSnapshot.getValue(String.class);
+                                        pn = dataSnapshot.child("product_name").getValue(String.class);
+                                        pi = dataSnapshot.child("product_image").getValue(String.class);
+                                        pp = dataSnapshot.child("product_price").getValue(double.class);
+                                        numStock = dataSnapshot.child("product_stock").getValue(int.class);
+
+                                        shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getUserID(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, pp, numStock);
                                     }
 
                                     @Override
@@ -132,62 +126,7 @@ public class Shopping_cart extends AppCompatActivity {
 
                                     }
                                 });
-                                dRef.child("product_image").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        //image_product = (ImageView)findViewById(R.id.productImage);
-                                        pi = dataSnapshot.getValue(String.class);
-                                        //Picasso.get().load(pi).into(image_product);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-                                dRef.child("product_price").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        //text_productPrice = (TextView)findViewById(R.id.productPrice);
-                                        pp = dataSnapshot.getValue(double.class);
-                                        //text_productPrice.setText("RM " + String.valueOf(pp));
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-                                spinner = (Spinner)findViewById(R.id.id_quantity);
-                                text_quantity = (TextView)findViewById(R.id.textQuantity);
-                                dRef.child("product_stock").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        numStock = dataSnapshot.getValue(int.class);
-                                        if (numStock == 0){
-                                            text_quantity.setVisibility(View.GONE);
-                                            spinner.setVisibility(View.GONE);
-                                            arrayList.clear();
-                                            arrayList.add(String.valueOf(0));
-                                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Shopping_cart.this, R.layout.style_spinner, arrayList);
-                                            spinner.setAdapter(arrayAdapter);
-                                        } else{
-                                            text_quantity.setVisibility(View.VISIBLE);
-                                            spinner.setVisibility(View.VISIBLE);
-                                            arrayList.clear();
-                                            for (int i = 1; i<=numStock; i++){
-                                                arrayList.add(String.valueOf(i));
-                                            }
-                                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Shopping_cart.this, R.layout.style_spinner, arrayList);
-                                            spinner.setAdapter(arrayAdapter);
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-                                shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getUserID(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, pp);
+                                //shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getUserID(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, pp);
                             }
                         }
                     };

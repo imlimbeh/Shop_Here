@@ -169,5 +169,6 @@
     <string name="subtotal_text">Subtotal </string>
     <string name="no_item_in_you_cart">No Item In you cart</string>
     <string name="delete_text">Delete</string>
-
+    <string name="name_on_card">Name On Card</string>
+    <string name="card_number">Card Number</string>
 </resources>
