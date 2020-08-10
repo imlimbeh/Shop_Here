@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,10 +30,12 @@ public class Shopping_cart extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference, dr, dRef;
+    TextView item, tolPrice, noItem;
+    ConstraintLayout bil;
     String userID, currentUserID;
     String pn,pi;
-    double pp;
-    int numStock;
+    double pp, totalPrice;
+    int numStock, totalItem;
 
     FirebaseAuth mFirebaseAuth;
 
@@ -91,6 +95,8 @@ public class Shopping_cart extends AppCompatActivity {
         if(databaseReference == null) {
 
         }else {
+            totalItem = 0;
+            totalPrice = 0.00;
             FirebaseRecyclerAdapter<product_ShoppingCart, ShoppingViewHolder> firebaseRecyclerAdapter =
                     new FirebaseRecyclerAdapter<product_ShoppingCart, ShoppingViewHolder>(
                             product_ShoppingCart.class,
@@ -116,7 +122,27 @@ public class Shopping_cart extends AppCompatActivity {
                                         pi = dataSnapshot.child("product_image").getValue(String.class);
                                         pp = dataSnapshot.child("product_price").getValue(double.class);
                                         numStock = dataSnapshot.child("product_stock").getValue(int.class);
-
+                                        totalItem += product.getQuantity();
+                                        totalPrice += product.getQuantity() * pp;
+                                        item = (TextView)findViewById(R.id.numSubtotal);
+                                        tolPrice = (TextView)findViewById(R.id.SubTotalPrice);
+                                        String it;
+                                        if (totalItem > 1){
+                                            it = " item ) ";
+                                        }else{
+                                            it = " items ) ";
+                                        }
+                                        bil = findViewById(R.id.bill);
+                                        noItem = (TextView)findViewById(R.id.no);
+                                        if (totalItem == 0) {
+                                            bil.setVisibility(View.GONE);
+                                            noItem.setVisibility(View.VISIBLE);
+                                        }else{
+                                            bil.setVisibility(View.VISIBLE);
+                                            noItem.setVisibility(View.GONE);
+                                        }
+                                        item.setText("( "+String.valueOf(totalItem)+it);
+                                        tolPrice.setText(String.format("RM %.2f",totalPrice));
                                         shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getUserID(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, pp, numStock);
                                     }
 

@@ -111,7 +111,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/SubTotalPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Price"
