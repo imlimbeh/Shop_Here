@@ -67,8 +67,8 @@ public class MainStore extends AppCompatActivity {
                 case R.id.nav_home:
                     break;
                 case R.id.nav_restore:
-                    //Intent restore = new Intent(MainStore.this, <?>.class);
-                    //startActivity(restore);
+                    //Intent history = new Intent(MainStore.this, PurchaseHistory.class);
+                    //startActivity(history);
                     Toast.makeText(MainStore.this, "Building!!",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_shopping_cart:

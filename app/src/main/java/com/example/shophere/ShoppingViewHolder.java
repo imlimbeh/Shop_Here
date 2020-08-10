@@ -77,7 +77,7 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder{
         text_shoppingID.setText(sID);
         num_quantity.setText(String.valueOf(quantity));
         text_productName.setText(pn);
-        text_productPrice.setText("RM "+String.valueOf(pp));
+        text_productPrice.setText(String.format("RM %.2f", pp));
         Picasso.get().load(pi).into(image_product);
         if(numStock == 0){
             text_quantity.setVisibility(View.GONE);

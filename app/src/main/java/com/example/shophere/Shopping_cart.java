@@ -158,8 +158,8 @@ public class Shopping_cart extends AppCompatActivity {
                     startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    //Intent restore = new Intent(MainStore.this, <?>.class);
-                    //startActivity(restore);
+                    //Intent history = new Intent(MainStore.this, PurchaseHistory.class);
+                    //startActivity(history);
                     Toast.makeText(Shopping_cart.this, "Building!!",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_shopping_cart:

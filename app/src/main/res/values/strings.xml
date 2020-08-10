@@ -174,4 +174,6 @@
     <string name="expiration_date">Expiration date</string>
     <string name="con">CONTINUE</string>
     <string name="pay_by_bank_transfer">Pay by bank transfer</string>
+    <string name="thank_text">Thank you ! Your order is complete.</string>
+    <string name="close_message_text">Close Message</string>
 </resources>

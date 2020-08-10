@@ -58,7 +58,7 @@ public class Categories extends AppCompatActivity {
                     startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    //Intent restore = new Intent(MainStore.this, <?>.class);
+                    //Intent restore = new Intent(MainStore.this, history.class);
                     //startActivity(restore);
                     Toast.makeText(Categories.this, "Building!!",Toast.LENGTH_SHORT).show();
                     break;

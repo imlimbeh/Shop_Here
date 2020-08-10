@@ -39,7 +39,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
 
         text_productID.setText(pID);
         text_productName.setText(pn);
-        text_productPrice.setText("RM "+String.valueOf(pp));
+        text_productPrice.setText(String.format("RM %.2f", pp));
         Picasso.get().load(pi).into(image_product);
 
         Animation animation = AnimationUtils.loadAnimation(ct, android.R.anim.slide_in_left);
