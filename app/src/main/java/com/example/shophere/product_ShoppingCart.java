@@ -3,6 +3,7 @@ package com.example.shophere;
 public class product_ShoppingCart {
     String product_id, shoppingCart_id;
     int quantity;
+    double product_price;
     public product_ShoppingCart(){
 
     }
@@ -21,7 +22,6 @@ public class product_ShoppingCart {
     public void setShoppingCart_id(String shoppingCart_id) {
         this.shoppingCart_id = shoppingCart_id;
     }
-
     public int getQuantity() {
         return quantity;
     }
@@ -30,4 +30,11 @@ public class product_ShoppingCart {
         this.quantity = quantity;
     }
 
+    public double getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(double product_price) {
+        this.product_price = product_price;
+    }
 }

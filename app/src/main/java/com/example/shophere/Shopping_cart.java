@@ -2,8 +2,6 @@ package com.example.shophere;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,12 +31,10 @@ public class Shopping_cart extends AppCompatActivity {
     TextView item, tolPrice, noItem;
     ConstraintLayout bil;
     ScrollView list;
-    String userID, currentUserID;
+    String currentUserID, shoppingID;
     String pn,pi;
-    double pp, totalPrice;
+    double totalPrice;
     int numStock, totalItem;
-    boolean b = false;
-    int haveCartOrNot = 0, test = 0;
     FirebaseAuth mFirebaseAuth;
 
     public Shopping_cart() {
@@ -60,7 +55,8 @@ public class Shopping_cart extends AppCompatActivity {
         bil = findViewById(R.id.bill);
         noItem = (TextView) findViewById(R.id.no);
         list = (ScrollView) findViewById(R.id.listCart);
-
+        item = (TextView) findViewById(R.id.numSubtotal);
+        tolPrice = (TextView) findViewById(R.id.SubTotalPrice);
 
         totalItem = 0;
         totalPrice = 0.00;
@@ -83,7 +79,7 @@ public class Shopping_cart extends AppCompatActivity {
 
             }
         });
-        FirebaseRecyclerAdapter<product_ShoppingCart, ShoppingViewHolder> firebaseRecyclerAdapter =
+        final FirebaseRecyclerAdapter<product_ShoppingCart, ShoppingViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<product_ShoppingCart, ShoppingViewHolder>(
                         product_ShoppingCart.class,
                         R.layout.list_shopping_cart,
@@ -103,12 +99,10 @@ public class Shopping_cart extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 pn = dataSnapshot.child("product_name").getValue(String.class);
                                 pi = dataSnapshot.child("product_image").getValue(String.class);
-                                pp = dataSnapshot.child("product_price").getValue(double.class);
                                 numStock = dataSnapshot.child("product_stock").getValue(int.class);
                                 totalItem += product.getQuantity();
-                                totalPrice += product.getQuantity() * pp;
-                                item = (TextView) findViewById(R.id.numSubtotal);
-                                tolPrice = (TextView) findViewById(R.id.SubTotalPrice);
+                                totalPrice += product.getQuantity() * product.getProduct_price();
+
                                 String it;
                                 if (totalItem > 1) {
                                     it = " item ) ";
@@ -117,7 +111,7 @@ public class Shopping_cart extends AppCompatActivity {
                                 }
                                 item.setText("( " + String.valueOf(totalItem) + it);
                                 tolPrice.setText(String.format("RM %.2f", totalPrice));
-                                shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, pp, numStock);
+                                shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, product.getProduct_price(), numStock);
                             }
 
                             @Override
@@ -126,6 +120,26 @@ public class Shopping_cart extends AppCompatActivity {
                             }
                         });
                     }
+                    @Override
+                    public ShoppingViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+                        final ShoppingViewHolder viewHolder = super.onCreateViewHolder(parent,viewType);
+                        viewHolder.setOnclickListener(new ShoppingViewHolder.ClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                            }
+                            @Override
+                            public void onItemLongClick(View view, int position) {
+
+                            }
+                            @Override
+                            public void onDeleteClick(View view, int position) {
+                                shoppingID = getItem(position).getShoppingCart_id();
+                                delete(shoppingID);
+                            }
+                        });
+                        return viewHolder;
+                    }
                 };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
 
@@ -133,11 +147,6 @@ public class Shopping_cart extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setSelectedItemId(R.id.nav_shopping_cart);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-    }
-
-    @Nullable
-    public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container, @NonNull AttributeSet attrs) {
-        return inflater.inflate(R.layout.activity_shopping_cart,container,false);
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -163,4 +172,33 @@ public class Shopping_cart extends AppCompatActivity {
             return true;
         }
     };
+    public void delete( String sID){
+        databaseReference.child(sID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    double pri = dataSnapshot.child("product_price").getValue(double.class);
+                    int quan = dataSnapshot.child("quantity").getValue(int.class);
+                    totalItem -= quan;
+                    totalPrice -= pri * quan;
+                    String it;
+                    if (totalItem > 1) {
+                        it = " item ) ";
+                    } else {
+                        it = " items ) ";
+                    }
+                    item.setText("( " + String.valueOf(totalItem) + it);
+                    tolPrice.setText(String.format("RM %.2f", totalPrice));
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.child(sID).removeValue();
+    }
 }

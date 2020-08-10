@@ -172,7 +172,6 @@
     <string name="name_on_card">Name On Card</string>
     <string name="card_number">Card Number</string>
     <string name="expiration_date">Expiration date</string>
-    <string name="continue">CONTINUE</string>
-    <string name="continue">CONTINUE</string>
+    <string name="con">CONTINUE</string>
     <string name="pay_by_bank_transfer">Pay by bank transfer</string>
 </resources>

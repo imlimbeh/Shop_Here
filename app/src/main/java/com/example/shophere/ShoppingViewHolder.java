@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,10 +21,45 @@ import java.util.ArrayList;
 
 public class ShoppingViewHolder extends RecyclerView.ViewHolder{
     View view;
+    Button del;
+    Spinner quanChange;
     private ArrayList<String> arrayList = new ArrayList<>();
     public ShoppingViewHolder (@NonNull View itemView) {
         super(itemView);
         view = itemView;
+        itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                mClicklistener.onItemClick(view, getAdapterPosition());
+            }
+        });
+        itemView.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view){
+                mClicklistener.onItemLongClick(view, getAdapterPosition());
+                return false;
+            }
+        });
+        del = view.findViewById(R.id.id_delete);
+        del.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+               mClicklistener.onDeleteClick(view, getAdapterPosition());
+            }
+        });
+        quanChange = view.findViewById(R.id.id_quantity);
+        quanChange.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String s = adapterView.getItemAtPosition(i).toString();
+                int newQuantity = 0;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
     public void setShopping(Context ct, String pID, String sID, int quantity, String pn, String pi, double pp, int numStock){
         CardView have = view.findViewById(R.id.card);
@@ -61,5 +98,14 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder{
 
         Animation animation = AnimationUtils.loadAnimation(ct, android.R.anim.slide_in_left);
         itemView.startAnimation(animation);
+    }
+    private ShoppingViewHolder.ClickListener mClicklistener;
+    public interface ClickListener {
+        void onDeleteClick(View view, int position);
+        void onItemClick(View view, int position);
+        void onItemLongClick(View view, int position);
+    }
+    public void setOnclickListener(ShoppingViewHolder.ClickListener clickListener){
+        mClicklistener = clickListener;
     }
 }

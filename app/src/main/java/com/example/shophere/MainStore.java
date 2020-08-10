@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,15 +23,11 @@ import com.squareup.picasso.Picasso;
 public class MainStore extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.shophere.extra.MESSAGE";
     public static final int TEXT_REQUEST = 1;
-    Button bLOUT;
     ImageView i1,i2,i3;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("product_videogames");
-    private DatabaseReference first = databaseReference.child("PV00001").child("product_image");
-    private DatabaseReference second = databaseReference.child("PV00002").child("product_image");
-    private DatabaseReference third = databaseReference.child("PV00003").child("product_image");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,35 +87,15 @@ public class MainStore extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        first.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String link = dataSnapshot.getValue(String.class);
-                Picasso.get().load(link).into(i1);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        second.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String link = dataSnapshot.getValue(String.class);
-                Picasso.get().load(link).into(i2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        third.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String link = dataSnapshot.getValue(String.class);
-                Picasso.get().load(link).into(i3);
+                String link1 = dataSnapshot.child("PV00001").child("product_image").getValue(String.class);
+                String link2 = dataSnapshot.child("PV00002").child("product_image").getValue(String.class);
+                String link3 = dataSnapshot.child("PV00003").child("product_image").getValue(String.class);
+                Picasso.get().load(link1).into(i1);
+                Picasso.get().load(link2).into(i2);
+                Picasso.get().load(link3).into(i3);
             }
 
             @Override

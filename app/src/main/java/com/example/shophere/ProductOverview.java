@@ -32,8 +32,7 @@ public class ProductOverview extends AppCompatActivity {
     ImageView image;
     int stockQ, i, num;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference;
-    private DatabaseReference findName, findImage, findPrice, findStock, findAboutUs, findDescription, findDetail, findFeaturesNDetail, findNumShoppingCart;
+    private DatabaseReference databaseReference, dataRef, findNumShoppingCart;
     FirebaseAuth mFirebaseAuth;
     FirebaseDatabase db;
     DatabaseReference myShoppingCart;
@@ -60,15 +59,8 @@ public class ProductOverview extends AppCompatActivity {
                 databaseReference = firebaseDatabase.getReference("product_videogames");
                 break;
         }
+        dataRef = databaseReference.child(productid);
         id.setText(productid);
-        findName = databaseReference.child(productid).child("product_name");
-        findImage = databaseReference.child(productid).child("product_image");
-        findPrice = databaseReference.child(productid).child("product_price");
-        findStock = databaseReference.child(productid).child("product_stock");
-        findAboutUs = databaseReference.child(productid).child("product_aboutus");
-        findDescription = databaseReference.child(productid).child("product_description");
-        findDetail = databaseReference.child(productid).child("product_detail");
-        findFeaturesNDetail = databaseReference.child(productid).child("product_featuresNdetails");
 
         // Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -106,46 +98,24 @@ public class ProductOverview extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        findName.addValueEventListener(new ValueEventListener() {
+        dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                name.setText(value);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findImage.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                Picasso.get().load(value).into(image);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findPrice.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                double value = dataSnapshot.getValue(double.class);
-                price.setText("RM "+String.valueOf(value));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findStock.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                stockQ = dataSnapshot.getValue(int.class);
+                String nm = dataSnapshot.child("product_name").getValue(String.class);
+                String im = dataSnapshot.child("product_image").getValue(String.class);
+                double pr = dataSnapshot.child("product_price").getValue(double.class);
+                String ab = dataSnapshot.child("product_aboutus").getValue(String.class);
+                String ds = dataSnapshot.child("product_description").getValue(String.class);
+                String dt = dataSnapshot.child("product_detail").getValue(String.class);
+                String fnd = dataSnapshot.child("product_featuresNdetails").getValue(String.class);
+                stockQ = dataSnapshot.child("product_stock").getValue(int.class);
+                name.setText(nm);
+                Picasso.get().load(im).into(image);
+                price.setText(String.format("RM %.2f", pr));
+                aboutUs.setText(ab.replace("\\n", "\n"));
+                description.setText(ds);
+                detail.setText(dt.replace("\\n","\n"));
+                featuresNDetails.setText("• "+fnd.replace("&", "\n• "));
                 stock.setText(String.valueOf(stockQ));
                 TextView textStock = (TextView) findViewById(R.id.id_gotStock);
                 LinearLayout hs1 = findViewById(R.id.haveShow1), hs2 = findViewById(R.id.haveShow2);
@@ -165,54 +135,6 @@ public class ProductOverview extends AppCompatActivity {
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ProductOverview.this, R.layout.style_spinner, arrayList);
                     spinner.setAdapter(arrayAdapter);
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findAboutUs.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                aboutUs.setText(value.replace("\\n", "\n"));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findDescription.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                description.setText(value);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findDetail.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                detail.setText(value.replace("\\n","\n"));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        findFeaturesNDetail.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                featuresNDetails.setText("• "+value.replace("&", "\n• "));
             }
 
             @Override
@@ -240,13 +162,14 @@ public class ProductOverview extends AppCompatActivity {
         String userID = mFirebaseAuth.getCurrentUser().getUid();
         String productID = id.getText().toString();
         Spinner q = (Spinner)findViewById(R.id.quantity);
+        double pri = Double.parseDouble(price.getText().toString().replace("RM ", ""));
         int productQuantity = Integer.valueOf(q.getSelectedItem().toString());
         db = FirebaseDatabase.getInstance();
         myShoppingCart = db.getReference("users").child(userID).child("shopping_cart").child(shoppingCart_id);
         myShoppingCart.child("shoppingCart_id").setValue(shoppingCart_id);
         myShoppingCart.child("product_id").setValue(productID);
         myShoppingCart.child("quantity").setValue(productQuantity);
-
+        myShoppingCart.child("product_price").setValue(pri);
 
         db.getReference("IDNumStore").child("shoppingCartNum").setValue(num);
         finish();
