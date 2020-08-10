@@ -24,7 +24,7 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         view = itemView;
     }
-    public void setShopping(Context ct, String pID, String uID, String sID, int quantity, String pn, String pi, double pp, int numStock){
+    public void setShopping(Context ct, String pID, String sID, int quantity, String pn, String pi, double pp, int numStock){
         CardView have = view.findViewById(R.id.card);
         have.setVisibility(View.VISIBLE);
         TextView text_shoppingID = view.findViewById(R.id.shoppingID);

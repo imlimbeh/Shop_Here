@@ -1,7 +1,7 @@
 package com.example.shophere;
 
 public class product_ShoppingCart {
-    String product_id, userID, shoppingCart_id;
+    String product_id, shoppingCart_id;
     int quantity;
     public product_ShoppingCart(){
 
@@ -12,14 +12,6 @@ public class product_ShoppingCart {
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public String getShoppingCart_id() {
