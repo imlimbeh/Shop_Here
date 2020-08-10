@@ -31,11 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="28dp"
             android:text="@string/cancel"
-            android:textSize="10sp"
-            android:layout_marginStart="15dp" />
+            android:textSize="12sp" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -53,10 +53,10 @@
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/scancardbar"
         android:layout_width="376dp"
         android:layout_height="44dp"
         android:layout_marginTop="8dp"
-        android:id="@+id/scancardbar"
         android:background="@drawable/rounded4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
@@ -105,107 +105,138 @@
         app:layout_constraintTop_toBottomOf="@id/scancardbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/carddetailsbar"
         android:layout_width="376dp"
         android:layout_height="44dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:id="@+id/carddetailsbar"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/or2">
+
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/cardname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:autofillHints=""
+            android:background="@android:color/white"
             android:hint="@string/name_on_card"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp" />
+            android:inputType="text" />
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/carddetailsbar2"
-        android:layout_width="376dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carddetailsbar">
 
-        <EditText
-            android:id="@+id/cardnumber"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/card_number"
-            android:layout_marginLeft="10dp"
-            android:inputType="number"
-            android:layout_marginStart="10dp" />
+            android:labelFor="@+id/bt_card_form_card_number"
+            app:layout_constraintTop_toBottomOf="@+id/carddetailsbar"
+            tools:ignore="RtlCompat">
 
+            <com.braintreepayments.cardform.view.CardEditText
+                android:id="@+id/bt_card_form_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/bt_form_hint_card_number"
+                android:inputType="number"
+                android:paddingTop="8dp"
+                android:textColorHint="@color/bt_light_gray"
+                android:textCursorDrawable="@null"
+                tools:ignore="NewApi" />
+
+        </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <TextView
-        android:id="@+id/textcreditcard2"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/expiration_date"
-        android:textColor="#000000"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/carddetailsbar2" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/carddetailsbar3"
-        android:layout_width="150dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textcreditcard2">
+        app:layout_constraintTop_toBottomOf="@+id/bottomNavigationView">
 
-        <Spinner
-            android:id="@+id/cardmonth"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"/>
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/carddetailsbar4"
-        android:layout_width="150dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.927"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textcreditcard2">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:labelFor="@+id/bt_card_form_expiration"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="305dp">
 
-        <Spinner
-            android:id="@+id/cardyear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+                <com.braintreepayments.cardform.view.ExpirationDateEditText
+                    android:id="@+id/bt_card_form_expiration"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/bt_form_hint_expiration"
+                    android:textColorHint="@color/bt_light_gray"
+                    android:textCursorDrawable="@null"
+                    tools:ignore="NewApi" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:labelFor="@+id/bt_card_form_cvv"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.braintreepayments.cardform.view.CvvEditText
+                    android:id="@+id/bt_card_form_cvv"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/bt_form_hint_cvv"
+                    android:textColorHint="@color/bt_light_gray"
+                    android:textCursorDrawable="@null"
+                    tools:ignore="NewApi" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <Button
         android:id="@+id/continuepay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded5"
         android:text="@string/con"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carddetailsbar4" />
+        app:layout_constraintTop_toBottomOf="@+id/bottomNavigationView2" />
 
 
     <TextView
@@ -224,12 +255,12 @@
         android:id="@+id/banktransfer"
         android:layout_width="376dp"
         android:layout_height="44dp"
-        android:background="@drawable/rounded4"
-        android:text="@string/pay_by_bank_transfer"
-        android:gravity="center_vertical"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/rounded4"
+        android:gravity="center_vertical"
+        android:text="@string/pay_by_bank_transfer"
         android:textColor="#0E7C98"
+        app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/or3" />
@@ -245,5 +276,25 @@
         app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/or3" />
+
+    <TextView
+        android:id="@+id/priID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="Price"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banktransfer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

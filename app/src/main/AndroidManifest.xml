@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".payment_detail"></activity>
+        <activity android:name=".PaymentComplete"></activity>
+        <activity android:name=".payment_detail" />
         <activity android:name=".ProductOverview" />
         <activity android:name=".Categories" />
         <activity android:name=".MenuBar" />

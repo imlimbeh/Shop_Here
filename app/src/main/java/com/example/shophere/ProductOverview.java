@@ -30,6 +30,7 @@ public class ProductOverview extends AppCompatActivity {
     private ArrayList<String> arrayList = new ArrayList<>();
     TextView name, price, id, stock, aboutUs, description, detail, featuresNDetails;
     ImageView image;
+    Spinner q;
     int stockQ, i, num;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference, dataRef, findNumShoppingCart;
@@ -52,6 +53,7 @@ public class ProductOverview extends AppCompatActivity {
         description = (TextView)findViewById(R.id.id_description);
         detail = (TextView)findViewById(R.id.id_detail);
         featuresNDetails = (TextView)findViewById(R.id.id_featuresndetail);
+        q = (Spinner)findViewById(R.id.quantity);
         String productid = getIntent().getStringExtra("id");
         String message = getIntent().getStringExtra("type");
         switch (message){
@@ -161,7 +163,6 @@ public class ProductOverview extends AppCompatActivity {
         String shoppingCart_id = "SC" + (num);
         String userID = mFirebaseAuth.getCurrentUser().getUid();
         String productID = id.getText().toString();
-        Spinner q = (Spinner)findViewById(R.id.quantity);
         double pri = Double.parseDouble(price.getText().toString().replace("RM ", ""));
         int productQuantity = Integer.valueOf(q.getSelectedItem().toString());
         db = FirebaseDatabase.getInstance();
@@ -176,6 +177,10 @@ public class ProductOverview extends AppCompatActivity {
     }
     public void onBuyNow(View view){
         Intent intent=new Intent(ProductOverview.this, payment_detail.class);
+        String productID = id.getText().toString();
+        int quan = Integer.parseInt(q.getSelectedItem().toString());
+        intent.putExtra("productid", productID);
+        intent.putExtra("quan", quan);
         startActivity(intent);
 
     }
