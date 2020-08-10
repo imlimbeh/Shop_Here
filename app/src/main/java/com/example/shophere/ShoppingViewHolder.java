@@ -57,6 +57,7 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder{
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ct, R.layout.style_spinner, arrayList);
         spinner.setAdapter(arrayAdapter);
+        spinner.setSelection(quantity-1);
 
         Animation animation = AnimationUtils.loadAnimation(ct, android.R.anim.slide_in_left);
         itemView.startAnimation(animation);

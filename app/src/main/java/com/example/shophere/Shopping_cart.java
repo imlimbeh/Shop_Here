@@ -103,7 +103,6 @@ public class Shopping_cart extends AppCompatActivity {
                             currentUserID = mFirebaseAuth.getCurrentUser().getUid();
                             userID = product.getUserID();
                             if(currentUserID.equals(userID)) {
-                                //Toast.makeText(Shopping_cart.this, product.getProduct_id(),Toast.LENGTH_SHORT).show();
                                 String checkProduct = product.getProduct_id().substring(0,2);
                                 switch (checkProduct){
                                     case "PV":
@@ -126,7 +125,6 @@ public class Shopping_cart extends AppCompatActivity {
 
                                     }
                                 });
-                                //shoppingViewHolder.setShopping(getApplicationContext(), product.getProduct_id(), product.getUserID(), product.getShoppingCart_id(), product.getQuantity(), pn, pi, pp);
                             }
                         }
                     };
