@@ -242,10 +242,8 @@ public class ProductOverview extends AppCompatActivity {
         Spinner q = (Spinner)findViewById(R.id.quantity);
         int productQuantity = Integer.valueOf(q.getSelectedItem().toString());
         db = FirebaseDatabase.getInstance();
-        //myShoppingCart = db.getReference("shopping_cart").child(shoppingCart_id);
         myShoppingCart = db.getReference("users").child(userID).child("shopping_cart").child(shoppingCart_id);
         myShoppingCart.child("shoppingCart_id").setValue(shoppingCart_id);
-        //myShoppingCart.child("userID").setValue(userID);
         myShoppingCart.child("product_id").setValue(productID);
         myShoppingCart.child("quantity").setValue(productQuantity);
 
