@@ -61,9 +61,8 @@ public class MenuBar extends AppCompatActivity {
                     startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    //Intent history = new Intent(MainStore.this, PurchaseHistory.class);
-                    //startActivity(history);
-                    Toast.makeText(MenuBar.this, "Building!!",Toast.LENGTH_SHORT).show();
+                    Intent history = new Intent(MenuBar.this, PurchaseHistory.class);
+                    startActivity(history);
                     break;
                 case R.id.nav_shopping_cart:
                     Intent shopping = new Intent(MenuBar.this, Shopping_cart.class);

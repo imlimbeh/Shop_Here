@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,9 +57,8 @@ public class Categories extends AppCompatActivity {
                     startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    //Intent restore = new Intent(MainStore.this, history.class);
-                    //startActivity(restore);
-                    Toast.makeText(Categories.this, "Building!!",Toast.LENGTH_SHORT).show();
+                    Intent restore = new Intent(Categories.this, PurchaseHistory.class);
+                    startActivity(restore);
                     break;
                 case R.id.nav_shopping_cart:
                     Intent shopping = new Intent(Categories.this, Shopping_cart.class);

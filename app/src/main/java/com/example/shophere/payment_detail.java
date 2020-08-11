@@ -58,7 +58,6 @@ public class payment_detail extends AppCompatActivity {
                 dr = firebaseDatabase.getReference("product_videogames");
         }
         databaseReference = dr.child(pid);
-        Toast.makeText(payment_detail.this, pid +"\n"+String.valueOf(quantity),Toast.LENGTH_SHORT).show();
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,8 +67,6 @@ public class payment_detail extends AppCompatActivity {
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String cardNum = String.valueOf(cardnum);
-                //String cardNum = cardnum.getCardType().name();
                 String cardNum = String.valueOf(cardnum.getText());
                 String cardType = cardnum.getCardType().name();
                 if(cardType == null || cardType == "UNKNOWN"){

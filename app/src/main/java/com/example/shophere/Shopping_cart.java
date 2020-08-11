@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +44,7 @@ public class Shopping_cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        recyclerView = findViewById(R.id.cartList);
+        recyclerView = findViewById(R.id.HistoryCartList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mFirebaseAuth = FirebaseAuth.getInstance();
         currentUserID = mFirebaseAuth.getCurrentUser().getUid();
@@ -158,9 +157,8 @@ public class Shopping_cart extends AppCompatActivity {
                     startActivity(choose);
                     break;
                 case R.id.nav_restore:
-                    //Intent history = new Intent(MainStore.this, PurchaseHistory.class);
-                    //startActivity(history);
-                    Toast.makeText(Shopping_cart.this, "Building!!",Toast.LENGTH_SHORT).show();
+                    Intent history = new Intent(Shopping_cart.this, PurchaseHistory.class);
+                    startActivity(history);
                     break;
                 case R.id.nav_shopping_cart:
                     break;

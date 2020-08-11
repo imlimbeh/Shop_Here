@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,9 +66,8 @@ public class MainStore extends AppCompatActivity {
                 case R.id.nav_home:
                     break;
                 case R.id.nav_restore:
-                    //Intent history = new Intent(MainStore.this, PurchaseHistory.class);
-                    //startActivity(history);
-                    Toast.makeText(MainStore.this, "Building!!",Toast.LENGTH_SHORT).show();
+                    Intent history = new Intent(MainStore.this, PurchaseHistory.class);
+                    startActivity(history);
                     break;
                 case R.id.nav_shopping_cart:
                     Intent shopping = new Intent(MainStore.this, Shopping_cart.class);
